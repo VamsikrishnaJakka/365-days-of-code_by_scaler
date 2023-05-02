@@ -1,0 +1,39 @@
+Problem Description:
+
+Given an array of size N, find the majority element. The majority element is the element that appears more than floor(N/2) times.
+You may assume that the array is non-empty and the majority element always exist in the array.
+
+Problem Constraints
+1 <= |A| <= 106
+1 <= Ai <= 109
+
+Input Format
+The first argument is an integer array A.
+
+Output Format
+Return the majority element.
+
+Example Input
+A = [2, 1, 2]
+
+Example Output
+2
+
+Example Explanation
+2 occurs 2 times which is greater than 3/2.
+
+
+Solution:
+class Solution:
+    # @param A : tuple of integers
+    # @return an integer
+    def majorityElement(self, A):
+        m = len(A)//2
+        for i in range(0,len(A)):
+            count = 0
+            for j in range(0, len(A)):
+                if A[i] == A[j]:
+                    count+=1    
+            if (count > m):
+                return A[i]
+        return -1
