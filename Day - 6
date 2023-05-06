@@ -1,0 +1,126 @@
+QUESTION - 1 :
+
+Problem Description
+Due to pollution Delhi government has applied odd even rule in Delhi.
+Traffic police on guard is recording the registration number of vehicles passing through his area and storing the last digit of the number in an array A.
+You are given the array A and date of the day B. Also fine for breaking the rule is C Rs.
+Find the total fine in Rs collected by the traffic police.
+
+Problem Constraints
+1 <= |A| <= 105
+1 <= B <= 31
+1 <= C <= 1000
+
+Input Format
+First arguement is an integer array A.
+Second argument is an integer B.
+Third argument is an integer C.
+
+Output Format
+Return an integer.
+
+Example Input
+Input 1:
+A = [1, 2, 3],B = 31,C = 100
+Input 2:
+A = [0, 1, 1],B = 2,C = 51
+
+Example Output
+Output 1:100
+Output 2:102
+
+Example Explanation
+Explanation 1:
+Vehicle 2 is not following the rule so only he will be fined.
+Explanation 2:
+Vehicle 2 and 3 are not following the rule so both of them will be fined.
+
+Solution : 
+class Solution:
+    # @param A : list of integers
+    # @param B : integer
+    # @param C : integer
+    # @return an integer
+    def solve(self, A, B, C):
+        s = []
+        if B % 2 == 0:
+            for i in range(len(A)):
+                if A[i] in [2,4,6,8,0]:
+                    s.append(0)
+                else:
+                    s.append(1)
+        else:
+            for i in range(len(A)):
+                if A[i] in [1,3,5,7,9]:
+                    s.append(0)
+                else:
+                    s.append(1)
+        count = 0
+        for i in range(len(s)):
+            if s[i] == 1:
+                count = count + 1
+        if count == 0:
+            return 0
+        return C*count
+            
+
+
+Question - 2:
+
+Problem Description
+Given a string A, find the frequency of all the characters in it.
+Problem Constraints
+1 <= |A| <= 105
+Ai = {Lowercase latin alphabets}
+
+Input Format
+Given a string A.
+Output Format
+Return an integer array of length 26.
+Array should contain frequency of characters in increasing order of characters.
+Example Input
+Input 1:
+A = "abcdefghijklmnopqrstuvwxyz"
+Input 2:
+A = "interviewbit"
+
+Example Output
+Output 1:
+{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+Output 2:
+{0, 1, 0, 0, 2, 0, 0, 0, 3, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0, 1, 1, 0, 0, 0}
+
+Example Explanation
+Explanation 1:
+Every charcater is present once in the string.
+Explanation 2:
+'b' is at indices 10.
+'e' is at indices 4, 8
+'i' is at indices 1, 7, 11
+'n' is at indices 2
+'r' is at indices 5
+'t' is at indices 3, 12
+'v' is at indices 6
+'w' is at indices 9
+Rest of the characters are not present in the string
+
+
+SOLUTION:
+class Solution:
+    def solve(self, A):
+        freq = {}
+        for char in A:
+            if char in freq:
+                freq[char] += 1
+            else:
+                freq[char] = 1
+        
+        result = []
+        for i in range(ord('a'), ord('z') + 1):
+            char = chr(i)
+            if char in freq:
+                result.append(freq[char])
+            else:
+                result.append(0)
+        
+        return result
